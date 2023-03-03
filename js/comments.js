@@ -53,7 +53,7 @@ class Comment{
                 },
                 body: JSON.stringify({
                     id: id,
-                    isLiked:true
+                    isLiked:this.isLiked
                 })
             })
         })
@@ -81,10 +81,10 @@ class Comment{
             method: 'POST',
             headers:headers,
             body: JSON.stringify(toAdd)
-        }).then(responce=>responce.json()).then(json=>this.setId(json.id))
+        }).then(responce=>responce.json()).then(json=>this.setId(json.comment.id))
     }
     
     setId(id){
-        this.id=id
+        this.id=id;
     }
 }
