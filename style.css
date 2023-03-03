@@ -115,7 +115,7 @@ i {
   color: #ccc;
 }
 
-#komentar-message {
+.message {
   text-align: left;
   color: red;
   display: none;

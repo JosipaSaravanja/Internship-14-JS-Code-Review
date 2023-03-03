@@ -1,4 +1,5 @@
 function writeCode(code){   
+    codelineNum=code.length;
     code.forEach((el, id) => {
         const codeBlock=document.getElementsByClassName('code-block')[0]
         const codeLine=document.createElement('div');

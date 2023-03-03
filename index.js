@@ -1,6 +1,7 @@
 const apiUrl = "https://homework-server1.onrender.com";
 const key = "JosipaSaravanja";
 const notes = JSON.parse(localStorage.getItem("notes"));
+let codelineNum=Number()
 const headers = {
   "Content-Type": "application/json",
   key,
@@ -47,21 +48,26 @@ fetch(`${apiUrl}/code`, {
 
 function closeOverlay() {
   document.getElementsByClassName("overlay")[0].style.display = "none";
+  /*document.getElementById("komentar").value = "";*/
 }
 
 function openOverlay(line) {
   let linija=document.getElementById("line")
   linija.value = line;
   const komentar = document.getElementById("komentar");
-  document.getElementById("komentar-message").style.display = "none";
+  const message1 = document.getElementById("line-message");
+  const message2 = document.getElementById("komentar-message");
+  message1.style.display = "none";
+  message2.style.display = "none";
   document.getElementsByClassName("overlay")[0].style.display = "block";
 
   document.getElementById("comment-button").addEventListener("click", () => {
     console.log(line);
-    const message = document.getElementById("komentar-message");
     if (!komentar.value) {
-      message.style.display = "block";
-    } else {
+      message2.style.display = "block";
+    } else if(linija.value>codelineNum || linija.value<=0){
+      message1.style.display = "block";
+    }else {
       new Comment(0, linija.value, komentar.value, false).save();
       komentar.value = "";
       closeOverlay();
@@ -69,13 +75,11 @@ function openOverlay(line) {
   });
 
   document.getElementById("notes-button").addEventListener("click", () => {
-    const message = document.getElementById("komentar-message");
     if (!komentar.value) {
-      message.style.display = "block";
+      message2.style.display = "block";
     } else {
       count++;
       new Note(count, linija.value, komentar.value, false).save();
-      komentar.value = "";
       closeOverlay();
     }
   });
