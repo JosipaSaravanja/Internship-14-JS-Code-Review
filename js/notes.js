@@ -1,14 +1,14 @@
-/* class Comment{
+class Note{
     constructor(id, lineNumber, text, isLiked){
-        this.id=id;
+        this.id=JSON.parse(JSON.stringify(id));
         this.line=lineNumber;
         this.text=text;
         this.isLiked=isLiked;
         this.date=new Date()
 
-        const line=document.getElementsByClassName('code-line')[lineNumber-1]
         const newComment=document.createElement('div')
         newComment.className="comment"
+        newComment.style.backgroundColor="#dbbac0"
 
         const newDate=document.createElement('p')
         newDate.innerHTML=`${new Date().getFullYear()}/${new Date().getMonth() + 1}/${new Date().getDate()}     ${new Date().getHours()}:${new Date().getMinutes()}`;
@@ -31,61 +31,50 @@
         newComment.appendChild(newDate)
         newComment.appendChild(newText)
         newComment.appendChild(newIcons)
-        console.log(lineNumber)
-        line.after(newComment)
+        document.getElementsByClassName('code-line')[lineNumber-1].after(newComment)
         
         likeIcon.addEventListener('click', ()=>{
             if(this.isLiked===true){
                 this.isLiked=false
                 likeIcon.style.color='black'
+                this.update(false)
             }
             else
             {
                 this.isLiked=true
+                this.update(true)
                 likeIcon.style.color='blue'
-            }     
-            console.log(this)
-            fetch(`${apiUrl}/update-is-liked/${this.id}`, {
-                method: 'PUT',
-                headers:{
-                    'Content-Type': 'application/json',
-                    key
-                },
-                body: JSON.stringify({
-                    id: id,
-                    isLiked:true
-                })
-            })
+            }
         })
+        
+        deleteIcon.addEventListener('click', ()=>{ 
+            newComment.style.display='none'; 
 
-        deleteIcon.addEventListener('click', ()=>{
-            newComment.style.display='none';
-            fetch(`${apiUrl}/remove/${id}`, {
-                method: 'DELETE',
-                headers:{
-                    'Content-Type': 'application/json',
-                    key
-                },
-                body: JSON.stringify({
-                    id: id
-                })
-            })
+            let notes = JSON.parse(localStorage.getItem("notes"));
+            notes=notes.filter(el=>el.id!=this.id)
+            localStorage.setItem("notes", JSON.stringify(notes))
+            if(notes.length==0){
+                localStorage.clear()
+            }
         })
     }
+
     save(){
-        const toAdd={
-            line: this.line,
-            text: this.text
+        let notes = JSON.parse(localStorage.getItem("notes"));
+        
+        if(!notes) notes = [];
+        notes.push(this);
+        localStorage.setItem("notes", JSON.stringify(notes))
+        location.reload(); 
         }
-        fetch(`${apiUrl}/create`, {
-            method: 'POST',
-            headers:headers,
-            body: JSON.stringify(toAdd)
-        }).then(responce=>responce.json()).then(json=>this.setId(json.id))
-    }
     
-    setId(id){
-        this.id=id
+    update(bool){
+        let notes = JSON.parse(localStorage.getItem("notes"));
+        notes.forEach(obj=>{
+            if (obj.id == this.id) {
+               obj.isLiked = bool;
+            }
+          })
+        localStorage.setItem("notes", JSON.stringify(notes))    
     }
 }
- */
