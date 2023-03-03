@@ -31,7 +31,6 @@ fetch(`${apiUrl}/code`, {
     })
       .then((resonce) => resonce.json())
       .then((x) => {
-        console.log(x.comments);
         x.comments.forEach(
           (comment) =>
             new Comment(comment.id, comment.line, comment.text, comment.isLiked)
@@ -62,7 +61,6 @@ function openOverlay(line) {
   document.getElementsByClassName("overlay")[0].style.display = "block";
 
   document.getElementById("comment-button").addEventListener("click", () => {
-    console.log(line);
     if (!komentar.value) {
       message2.style.display = "block";
     } else if(linija.value>codelineNum || linija.value<=0){

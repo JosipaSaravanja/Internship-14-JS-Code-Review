@@ -31,7 +31,6 @@ class Comment{
         newComment.appendChild(newDate)
         newComment.appendChild(newText)
         newComment.appendChild(newIcons)
-        console.log(lineNumber)
         line.after(newComment)
         
         likeIcon.addEventListener('click', ()=>{
@@ -44,7 +43,6 @@ class Comment{
                 this.isLiked=true
                 likeIcon.style.color='darkblue'
             }     
-            console.log(this)
             fetch(`${apiUrl}/update-is-liked/${this.id}`, {
                 method: 'PUT',
                 headers:{
