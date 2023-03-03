@@ -65,7 +65,6 @@ class Note{
         if(!notes) notes = [];
         notes.push(this);
         localStorage.setItem("notes", JSON.stringify(notes))
-        location.reload(); 
         }
     
     update(bool){

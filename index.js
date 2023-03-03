@@ -6,7 +6,11 @@ const headers = {
   key,
 };
 
-let count = Number(); //pronaći neki bolji nacin
+document.getElementsByClassName("closebtn")[0].addEventListener("click", () => {
+  closeOverlay()
+});
+
+let count = Number(); //pronaći neki bolji nacin pracenja id za localStorage notes
 if (notes) {
   count = notes[notes.length - 1].id;
 } else {
@@ -18,7 +22,7 @@ fetch(`${apiUrl}/code`, {
   headers: headers,
 })
   .then((resonce) => resonce.json())
-  .then((json) => writeCode(json.code.split("\n")))
+  .then((json) => writeCode(json.code.split("\n"))) //splitati bez uklanjanja whitespaces?
   .then(() => {
     fetch(`${apiUrl}/comments`, {
       method: "GET",
@@ -40,20 +44,25 @@ fetch(`${apiUrl}/code`, {
     }
   });
 
+
 function closeOverlay() {
   document.getElementsByClassName("overlay")[0].style.display = "none";
 }
 
 function openOverlay(line) {
+  let linija=document.getElementById("line")
+  linija.value = line;
   const komentar = document.getElementById("komentar");
   document.getElementById("komentar-message").style.display = "none";
   document.getElementsByClassName("overlay")[0].style.display = "block";
+
   document.getElementById("comment-button").addEventListener("click", () => {
+    console.log(line);
     const message = document.getElementById("komentar-message");
     if (!komentar.value) {
       message.style.display = "block";
     } else {
-      new Comment(0, line, komentar.value, false).save();
+      new Comment(0, linija.value, komentar.value, false).save();
       komentar.value = "";
       closeOverlay();
     }
@@ -65,9 +74,10 @@ function openOverlay(line) {
       message.style.display = "block";
     } else {
       count++;
-      new Note(count, line, komentar.value, false).save();
+      new Note(count, linija.value, komentar.value, false).save();
       komentar.value = "";
       closeOverlay();
     }
   });
+  
 }

@@ -1,4 +1,4 @@
-/* class Comment{
+class Comment{
     constructor(id, lineNumber, text, isLiked){
         this.id=id;
         this.line=lineNumber;
@@ -88,4 +88,3 @@
         this.id=id
     }
 }
- */
