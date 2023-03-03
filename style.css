@@ -130,7 +130,7 @@ i{
     background: white;
   }
   
-  #submit{
+  .overlay button {
     float: left;
     width: 20%;
     padding: 15px;
@@ -140,6 +140,6 @@ i{
     cursor: pointer;
   }
   
-  #submit:hover {
+  .overlay button :hover {
     background: #bbb;
   }

@@ -1,12 +1,38 @@
+
+const notes = JSON.parse(localStorage.getItem("notes"));
+const code=['alert("1")', 'alert("2")', 'alert("3")', 'alert("4")', 'alert("5")', 'alert("6")', 'alert("7")', 'alert("8")', 'alert("9")', 'alert("10")']
+let count=Number()
+if(!notes){
+    count=0
+}else {
+    count=notes[notes.length-1].id
+}
+
+
 function closeOverlay(){
     document.getElementsByClassName("overlay")[0].style.display = "none";
 }
 
-function openOverlay(){
+function openOverlay(line){
     document.getElementsByClassName("overlay")[0].style.display = "block";
+    document.getElementById("comment-button").addEventListener('click', ()=>{
+        const autor=document.getElementById("autor");
+        const komentar=document.getElementById("komentar");
+        new Comment(line, autor.value, komentar.value, false).save(); //KAKo ces promjene likeova?
+        komentar.value="";
+        location.reload();
+        closeOverlay()
+    });
+    
+    document.getElementById("notes-button").addEventListener('click', ()=>{
+        const komentar=document.getElementById("komentar");
+        count++
+        new Note(count, line, komentar.value, false).save(); 
+        komentar.value="";
+        location.reload()
+        closeOverlay()});
 }
 
-const code=['alert("1")', 'alert("2")', 'alert("3")', 'alert("4")', 'alert("5")', 'alert("6")', 'alert("7")', 'alert("8")', 'alert("9")', 'alert("10")']
 
 function writeCode(code){
     code.forEach((el, id) => {
@@ -20,7 +46,7 @@ function writeCode(code){
         ordNumb.innerHTML=`${id+1}.`;
         ordNumb.addEventListener('mouseover', ()=>{ordNumb.innerHTML="+"})
         ordNumb.addEventListener('mouseleave', ()=>{ordNumb.innerHTML=`${id+1}.`;})
-        ordNumb.addEventListener('click', ()=>openOverlay())
+        ordNumb.addEventListener('click', ()=>openOverlay(id))
         codeLine.appendChild(ordNumb)
         
         const text=document.createElement('div');
@@ -34,10 +60,10 @@ function writeCode(code){
 writeCode(code)
 
 
-class Comment{
-    constructor(lineNumber, author, text, isLiked){
-        this.line=lineNumber;
-        this.author=author;
+class Note{
+    constructor(id, lineNumber, text, isLiked){
+        this.id=JSON.parse(JSON.stringify(id));
+        this.line=lineNumber+1;
         this.text=text;
         this.isLiked=isLiked;
         this.date=new Date()
@@ -45,9 +71,7 @@ class Comment{
         const line=document.getElementsByClassName('code-line')[lineNumber]
         const newComment=document.createElement('div')
         newComment.className="comment"
-
-        const newAuthor=document.createElement('h3')
-        newAuthor.innerHTML=author;
+        newComment.style.backgroundColor="pink"
 
         const newDate=document.createElement('p')
         newDate.innerHTML=new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getDate();;
@@ -67,7 +91,6 @@ class Comment{
         deleteIcon.style="font-size: 25px"
         newIcons.appendChild(deleteIcon)
 
-        newComment.appendChild(newAuthor)
         newComment.appendChild(newDate)
         newComment.appendChild(newText)
         newComment.appendChild(newIcons)
@@ -82,13 +105,30 @@ class Comment{
             {
                 this.isLiked=true
                 likeIcon.style.color='blue'
-            }     
-            console.log(this)})
+            }})
+        
+        deleteIcon.addEventListener('click', ()=>{ 
+            newComment.style.display='none'; 
 
-        deleteIcon.addEventListener('click', ()=>{ newComment.style.display='none';})
+            let notes = JSON.parse(localStorage.getItem("notes"));
+            console.log(this.id)
+            notes=notes.filter(el=>el.id!=this.id)
+            console.log(notes)
+            localStorage.setItem("notes", JSON.stringify(notes))
+            if(notes.length==0){
+                localStorage.clear()
+            }
+        })
     }
+    save(){
+        let notes = JSON.parse(localStorage.getItem("notes"));
+        
+        if(!notes) {notes = [];}
+            notes.push(this);
+            localStorage.setItem("notes", JSON.stringify(notes))
+        }
 }
 
-
-console.log(new Comment(3, 'Josipa', 'neki komentar ', false)) //4 linija (4-1)
-console.log(new Comment(5, 'Josipa2', 'neki drugi komentar ', false)) //6 linija (6-1)
+if(notes){
+    notes.forEach(el=>{new Note(el.id, el.line-1, el.text, el.isLiked, el.date)})
+}
