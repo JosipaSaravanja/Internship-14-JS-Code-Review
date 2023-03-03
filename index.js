@@ -100,12 +100,15 @@ class Note{
             if(this.isLiked===true){
                 this.isLiked=false
                 likeIcon.style.color='black'
+                this.update(false)
             }
             else
             {
                 this.isLiked=true
+                this.update(true)
                 likeIcon.style.color='blue'
-            }})
+            }
+        })
         
         deleteIcon.addEventListener('click', ()=>{ 
             newComment.style.display='none'; 
@@ -127,8 +130,18 @@ class Note{
             notes.push(this);
             localStorage.setItem("notes", JSON.stringify(notes))
         }
+    
+    update(bool){
+        let notes = JSON.parse(localStorage.getItem("notes"));
+        notes.forEach(obj=>{
+            if (obj.id == this.id) {
+               obj.isLiked = bool;
+            }
+          })
+        localStorage.setItem("notes", JSON.stringify(notes))
+        //promijeni boolean u local storegu        
+    }
 }
-
 if(notes){
     notes.forEach(el=>{new Note(el.id, el.line-1, el.text, el.isLiked, el.date)})
 }
