@@ -21,7 +21,7 @@ class Note{
         likeIcon.classList="like fa fa-thumbs-up"
         likeIcon.style="font-size: 25px"
         newIcons.appendChild(likeIcon)
-        isLiked===true?likeIcon.style.color='blue':likeIcon.style.color='black';
+        isLiked===true?likeIcon.style.color='darkblue':likeIcon.style.color='black';
 
         const deleteIcon=document.createElement('i');
         deleteIcon.classList="delete fa fa-trash-o"
@@ -43,7 +43,7 @@ class Note{
             {
                 this.isLiked=true
                 this.update(true)
-                likeIcon.style.color='blue'
+                likeIcon.style.color='darkblue'
             }
         })
         

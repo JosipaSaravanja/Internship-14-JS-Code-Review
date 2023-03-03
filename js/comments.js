@@ -21,7 +21,7 @@ class Comment{
         likeIcon.classList="like fa fa-thumbs-up"
         likeIcon.style="font-size: 25px"
         newIcons.appendChild(likeIcon)
-        isLiked===true?likeIcon.style.color='blue':likeIcon.style.color='black';
+        isLiked===true?likeIcon.style.color='darkblue':likeIcon.style.color='black';
 
         const deleteIcon=document.createElement('i');
         deleteIcon.classList="delete fa fa-trash-o"
@@ -42,7 +42,7 @@ class Comment{
             else
             {
                 this.isLiked=true
-                likeIcon.style.color='blue'
+                likeIcon.style.color='darkblue'
             }     
             console.log(this)
             fetch(`${apiUrl}/update-is-liked/${this.id}`, {

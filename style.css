@@ -1,158 +1,157 @@
-body{
-    display: flex;
-    padding: 0;
-    margin: 0;
-    flex-direction: row;
-}
-p, h3{
-    margin: 0  0 10px 0;
-}
-i{
-    margin-right: 10px;
+body {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  flex-direction: row;
+  background-color: #cccaca;
 }
 
-
-  * {
-    box-sizing: border-box;
-  }
-  
-
-.code-block{
-  background-color: rgb(118, 120, 133);
-    border: 1px solid rgb(6, 14, 6);
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
+p, h3 {
+  margin: 0 0 10px 0;
 }
-.code-line{
-    display: flex;
-    flex-direction: row;
-    border: 1px solid darkgreen;
-    border-left: 0px;
-    border-right: 0px;
-    padding-top: 7px;
-    padding-bottom: 7px;
+i {
+  margin-right: 10px;
 }
 
-.code-line:hover{
+* {
+  box-sizing: border-box;
+}
+
+.code-block {
+  background-color: rgb(172, 172, 175);
+  border: 1px solid rgb(6, 14, 6);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+.code-line {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid darkblue;
+  border-left: 0px;
+  border-right: 0px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.code-line:hover {
   background-color: rgb(92, 97, 110);
 }
 
-.ord-number{
-    text-align: center;
-    width: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
+.ord-number {
+  text-align: center;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-.comment{
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin: 10px;
-    border: 2px solid gray;
-    padding: 10px;
-    background-color: rgb(243, 241, 241);
-    width: 50%;
+.comment {
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 10px;
+  border: 2px solid gray;
+  padding: 10px;
+  background-color: rgb(243, 241, 241);
+  width: 50%;
 }
-
 
 .comments::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
-  
-.fa{
-    cursor: pointer; vertical-align :-10px;}
+.fa {
+  cursor: pointer;
+  vertical-align: -10px;
+}
 
+.openBtn {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
 
-  .openBtn {
-    background: #f1f1f1;
-    border: none;
-    padding: 10px 15px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .openBtn:hover {
-    background: #bbb;
-  }
-  
-  .overlay {
-    height: 100%;
-    width: 100%;
-    display: none;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
-  }
-  
-  .overlay-content {
-    position: relative;
-    top: 46%;
-    width: 80%;
-    text-align: center;
-    margin-top: 30px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .overlay .closebtn {
-    position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-    cursor: pointer;
-    color: white;
-  }
-  
-  .overlay .closebtn:hover {
-    color: #ccc;
-  }
-  
-  #komentar-message{
-    text-align: left;
-    color: red;
-    display: none;
-  }
+.openBtn:hover {
+  background: #bbb;
+}
 
-  .overlay-buttons{
-    display: flex;
-    flex-direction: row;
-  }
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
 
-  .overlay input {
-    padding: 15px;
-    font-size: 17px;
-    border: none;
-    float: left;
-    width: 80%;
-    background: white;
-    display: flex;
-    font-size: 17px;
-    border: none;
-    float: left;
-    width: 100%;
-    background: white;
-  }
-  
-  .overlay button {
-    display: inline;
-    float: left;
-    width: 50%;
-    padding: 15px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .overlay button :hover {
-    background: #bbb;
-  }
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+#komentar-message {
+  text-align: left;
+  color: red;
+  display: none;
+}
+
+.overlay-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.overlay input {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+  display: flex;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 100%;
+  background: white;
+}
+
+.overlay button {
+  display: inline;
+  float: left;
+  width: 50%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button :hover {
+  background: #bbb;
+}
